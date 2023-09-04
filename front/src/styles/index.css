@@ -1,0 +1,26 @@
+@import "./normalize.css";
+
+* {
+  font-family: "Inter";
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
+input {
+  border-radius: 5px;
+  appearance: none;
+  outline: none;
+  border: 0;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+}

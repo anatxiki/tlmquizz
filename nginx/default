@@ -1,0 +1,36 @@
+upstream api {
+	server 127.0.0.1:5000;
+}
+
+upstream react_dev {
+	server 127.0.0.1:3000;
+}
+
+server {
+	# listen 80 default_server;
+	# listen [::]:80 default_server;
+
+	# SSL configuration
+	listen 443 ssl default_server;
+	listen [::]:443 ssl default_server;
+	ssl_certificate /etc/ssl/private/tlmquizz.crt;
+	ssl_certificate_key /etc/ssl/private/tlmquizz.key;
+
+	root /var/www/html;
+
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location /api/ {
+		proxy_pass http://api/;
+	}
+
+	location / {
+		# Versión de producción
+		try_files $uri $uri/ =404;
+		# Versión de desarrollo
+		# proxy_pass http://react_dev/;
+	}
+}
